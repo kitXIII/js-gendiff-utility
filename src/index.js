@@ -1,6 +1,11 @@
-const check = (first, second) => {
-  console.log(first);
-  console.log(second);
+const fs = require('fs');
+
+const genDiff = (firstPath, secondPath) => {
+  const jsonFirst = fs.readFileSync(firstPath);
+  const jsonSecond = fs.readFileSync(secondPath);
+
+  console.log(jsonFirst);
+  console.log(jsonSecond);
 };
 
-export default check;
+export default genDiff;

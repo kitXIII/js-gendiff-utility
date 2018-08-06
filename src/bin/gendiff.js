@@ -1,23 +1,19 @@
 #!/usr/bin/env node
 
 import commander from 'commander';
-import utility from '../index';
-
+import utility from '..';
 
 const program = commander;
 
 program
   .version('0.0.2')
   .description('Compares two configuration files and shows a difference.')
-  .option('-f, --format [type]', 'Output format')
+  .option('-f, --format [type]', 'Output format', 'json')
   .arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig, options) => {
     const type = options.format;
-    if (typeof type !== 'undefined') {
-      utility(firstConfig, secondConfig);
-    } else {
-      console.log('Use -f option');
-    }
+    console.log('Type of configuration files: ', type);
+    utility(firstConfig, secondConfig);
   })
   .parse(process.argv);
 
