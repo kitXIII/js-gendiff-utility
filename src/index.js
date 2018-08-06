@@ -1,4 +1,4 @@
-const check = (first, second) => {
+const check = (first, second, type) => {
   console.log(first);
   console.log(second);
 };
