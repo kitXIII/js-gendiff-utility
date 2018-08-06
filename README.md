@@ -12,7 +12,7 @@ Utility that compares two configuration files and shows a difference.
 `$ npm install -g kit-diff-util`
 
 
-## Run help
+## Get help
 
 
 `$ gendiff -h`
