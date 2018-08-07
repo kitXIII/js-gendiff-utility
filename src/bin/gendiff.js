@@ -12,13 +12,7 @@ program
   .arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig, options) => {
     const type = options.format;
-    switch (type) {
-      case 'json':
-        console.log(utility(firstConfig, secondConfig));
-        break;
-      default:
-        console.log('Use correct file format');
-    }
+    console.log(utility(firstConfig, secondConfig, type));
   })
   .parse(process.argv);
 

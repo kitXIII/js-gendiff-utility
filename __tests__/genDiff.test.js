@@ -10,5 +10,5 @@ const firstPath = path.resolve(__dirname, '__fixtures__/before.json');
 const secondPath = path.resolve(__dirname, '__fixtures__/after.json');
 
 test('Get diff two json files', () => {
-  expect(genDiff(firstPath, secondPath)).toBe(result);
+  expect(genDiff(firstPath, secondPath, 'json')).toBe(result);
 });

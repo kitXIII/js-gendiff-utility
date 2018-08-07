@@ -1,8 +1,5 @@
 import _ from 'lodash';
-
-const fs = require('fs');
-
-const getObjFromJsonFile = filePath => JSON.parse(fs.readFileSync(filePath, 'utf8'));
+import fileParse from './parsers/fileParse';
 
 const genDiffStrByKey = (key, obj1, obj2) => {
   if (!_.has(obj1, key)) {
@@ -17,12 +14,12 @@ const genDiffStrByKey = (key, obj1, obj2) => {
   return `+ ${key}: ${obj2[key]}\n  - ${key}: ${obj1[key]}`;
 };
 
-const genDiff = (firstPath, secondPath) => {
-  const objFirst = getObjFromJsonFile(firstPath);
-  const objSecond = getObjFromJsonFile(secondPath);
+const genDiff = (firstPath, secondPath, type) => {
+  const first = fileParse(firstPath, type);
+  const second = fileParse(secondPath, type);
 
-  const keys = Object.keys({ ...objFirst, ...objSecond });
-  const resultStr = keys.reduce((accStr, key) => `${accStr}  ${genDiffStrByKey(key, objFirst, objSecond)}\n`, '');
+  const keys = Object.keys({ ...first.obj, ...second.obj });
+  const resultStr = keys.reduce((accStr, key) => `${accStr}  ${genDiffStrByKey(key, first.obj, second.obj)}\n`, '');
 
   return `{\n${resultStr}}`;
 };
