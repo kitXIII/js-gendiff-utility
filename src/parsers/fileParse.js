@@ -1,13 +1,16 @@
 import JsonParser from './JsonParser';
 import YamlParser from './YamlParser';
 
-export default (filename, type) => {
+const path = require('path');
+
+export default (filename) => {
+  const type = path.extname(filename);
   switch (type) {
-    case 'json':
+    case '.json':
       return new JsonParser(filename);
-    case 'yaml':
+    case '.yml':
       return new YamlParser(filename);
     default:
-      throw Error('Uses an incorrect custom format');
+      throw Error('Uses an incorrect input file format');
   }
 };

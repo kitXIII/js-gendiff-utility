@@ -13,9 +13,9 @@ const firstYamlPath = path.resolve(__dirname, '__fixtures__/before.yml');
 const secondYamlPath = path.resolve(__dirname, '__fixtures__/after.yml');
 
 test('Get diff two json files', () => {
-  expect(genDiff(firstJsonPath, secondJsonPath, 'json')).toBe(result);
+  expect(genDiff(firstJsonPath, secondJsonPath)).toBe(result);
 });
 
 test('Get diff two yaml files', () => {
-  expect(genDiff(firstYamlPath, secondYamlPath, 'yaml')).toBe(result);
+  expect(genDiff(firstYamlPath, secondYamlPath)).toBe(result);
 });
