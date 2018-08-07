@@ -1,27 +1,38 @@
 import _ from 'lodash';
-import fileParse from './parsers/fileParse';
+import { safeLoad } from 'js-yaml';
+import { parse as iniParse } from 'ini';
 
-const genDiffStrByKey = (key, obj1, obj2) => {
-  if (!_.has(obj1, key)) {
-    return `+ ${key}: ${obj2[key]}`;
-  }
-  if (!_.has(obj2, key)) {
-    return `- ${key}: ${obj1[key]}`;
-  }
-  if (obj1[key] === obj2[key]) {
-    return `  ${key}: ${obj1[key]}`;
-  }
-  return `+ ${key}: ${obj2[key]}\n  - ${key}: ${obj1[key]}`;
+const parsers = {
+  json: JSON.parse,
+  yml: safeLoad,
+  ini: iniParse,
 };
 
-const genDiff = (firstPath, secondPath) => {
-  const first = fileParse(firstPath);
-  const second = fileParse(secondPath);
+const genDiffObjByKey = (key, obj1, obj2) => {
+  if (!_.has(obj1, key)) {
+    return { [`+ ${key}`]: obj2[key] };
+  }
+  if (!_.has(obj2, key)) {
+    return { [`- ${key}`]: obj1[key] };
+  }
+  if (obj1[key] === obj2[key]) {
+    return { [`  ${key}`]: obj1[key] };
+  }
+  return { [`+ ${key}`]: obj2[key], [`- ${key}`]: obj1[key] };
+};
 
-  const keys = _.union(_.keys(first.obj), _.keys(second.obj));
-  const resultStr = keys.reduce((accStr, key) => `${accStr}  ${genDiffStrByKey(key, first.obj, second.obj)}\n`, '');
+const genDiff = (firstData, secondData, type) => {
+  const obj1 = parsers[type](firstData);
+  const obj2 = parsers[type](secondData);
 
-  return `{\n${resultStr}}`;
+  const keys = _.union(_.keys(obj1), _.keys(obj2));
+  const result = keys.reduce((acc, key) => {
+    const diffObj = genDiffObjByKey(key, obj1, obj2);
+    return { ...acc, ...diffObj };
+  }, {});
+
+  const resultStr = JSON.stringify(result, null, 2).replace(/"|,/g, '');
+  return resultStr;
 };
 
 export default genDiff;
