@@ -6,14 +6,19 @@ import utility from '..';
 const program = commander;
 
 program
-  .version('0.0.2')
+  .version('0.0.3')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'Output format', 'json')
   .arguments('<firstConfig> <secondConfig>')
   .action((firstConfig, secondConfig, options) => {
     const type = options.format;
-    console.log('Type of configuration files: ', type);
-    utility(firstConfig, secondConfig);
+    switch (type) {
+      case 'json':
+        console.log(utility(firstConfig, secondConfig));
+        break;
+      default:
+        console.log('Use correct file format');
+    }
   })
   .parse(process.argv);
 
