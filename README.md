@@ -20,4 +20,4 @@ Utility that compares two configuration files and shows a difference.
 
 ## Example
 
-[![asciicast](https://asciinema.org/a/195347.png)](https://asciinema.org/a/195347)
+![](https://kitxiii.github.io/media/gif/gendiff006.gif)
