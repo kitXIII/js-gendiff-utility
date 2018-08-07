@@ -38,7 +38,7 @@ const handler = (firstConfig, secondConfig, options) => {
 };
 
 program
-  .version('0.0.8')
+  .version('0.0.9')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'Output format', 'txt')
   .arguments('<firstConfig> <secondConfig>')
