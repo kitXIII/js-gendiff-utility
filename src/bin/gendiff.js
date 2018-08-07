@@ -6,7 +6,7 @@ import utility from '..';
 const program = commander;
 
 program
-  .version('0.0.7')
+  .version('0.0.8')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'Output format', 'txt')
   .arguments('<firstConfig> <secondConfig>')
