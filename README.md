@@ -18,6 +18,10 @@ Utility that compares two configuration files and shows a difference.
 `$ gendiff -h`
 
 
-## Example
+## Example JSON file
 
 ![](https://kitxiii.github.io/media/gif/gendiff006.gif)
+
+## Example YAML file
+
+![](https://kitxiii.github.io/media/gif/gendiff007.gif)
