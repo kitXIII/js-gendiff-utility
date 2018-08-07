@@ -1,6 +1,6 @@
 import fileParse from '../src/parsers/fileParse';
-import JsonParser from '../src/parsers/JsonParser';
-import YamlParser from '../src/parsers/YamlParser';
+import JsonParse from '../src/parsers/JsonParse';
+import YamlParse from '../src/parsers/YamlParse';
 
 const path = require('path');
 
@@ -9,9 +9,9 @@ const yamlFilePath = path.resolve(__dirname, '__fixtures__/before.yml');
 
 
 test('Test fileParse JSON format', () => {
-  expect(fileParse(jsonFilePath)).toBeInstanceOf(JsonParser);
+  expect(fileParse(jsonFilePath)).toBeInstanceOf(JsonParse);
 });
 
 test('Test fileParse YAML format', () => {
-  expect(fileParse(yamlFilePath)).toBeInstanceOf(YamlParser);
+  expect(fileParse(yamlFilePath)).toBeInstanceOf(YamlParse);
 });
