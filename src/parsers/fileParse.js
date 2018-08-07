@@ -1,5 +1,6 @@
 import JsonParse from './JsonParse';
 import YamlParse from './YamlParse';
+import IniParse from './IniParse';
 
 const path = require('path');
 
@@ -10,6 +11,8 @@ export default (filename) => {
       return new JsonParse(filename);
     case '.yml':
       return new YamlParse(filename);
+    case '.ini':
+      return new IniParse(filename);
     default:
       throw Error(`Uses an incorrect input file format ${type}`);
   }
