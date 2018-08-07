@@ -18,7 +18,7 @@ const genDiff = (firstPath, secondPath) => {
   const first = fileParse(firstPath);
   const second = fileParse(secondPath);
 
-  const keys = Object.keys({ ...first.obj, ...second.obj });
+  const keys = _.union(_.keys(first.obj), _.keys(second.obj));
   const resultStr = keys.reduce((accStr, key) => `${accStr}  ${genDiffStrByKey(key, first.obj, second.obj)}\n`, '');
 
   return `{\n${resultStr}}`;
