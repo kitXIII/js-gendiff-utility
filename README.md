@@ -18,4 +18,6 @@ Utility that compares two configuration files and shows a difference.
 `$ gendiff -h`
 
 
+## Example
 
+[![asciicast](https://asciinema.org/a/195347.png)](https://asciinema.org/a/195347)
