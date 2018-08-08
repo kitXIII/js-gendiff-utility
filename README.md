@@ -32,5 +32,4 @@ Utility that compares two configuration files and shows a difference.
 
 ## Actual asciinema
 
-[asciinema](https://asciinema.org/a/195554)
-
+[asciinema](https://asciinema.org/a/195582)
