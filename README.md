@@ -29,3 +29,8 @@ Utility that compares two configuration files and shows a difference.
 ## Demo ini file
 
 ![](https://kitxiii.github.io/media/gif/gendiff008.gif)
+
+## Last asciinema
+
+[asciinema](https://asciinema.org/a/195512)
+
