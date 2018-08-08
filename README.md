@@ -30,7 +30,7 @@ Utility that compares two configuration files and shows a difference.
 
 ![](https://kitxiii.github.io/media/gif/gendiff008.gif)
 
-## Last asciinema
+## Actual asciinema
 
-[asciinema](https://asciinema.org/a/195512)
+[asciinema](https://asciinema.org/a/195543)
 
