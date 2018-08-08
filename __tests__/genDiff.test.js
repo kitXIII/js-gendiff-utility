@@ -13,17 +13,18 @@ const secondYamlPath = path.resolve(__dirname, '__fixtures__/after.yml');
 const firstIniPath = path.resolve(__dirname, '__fixtures__/before.ini');
 const secondIniPath = path.resolve(__dirname, '__fixtures__/after.ini');
 
-test('Get diff two json files', () => {
+describe('Get diff between two files', () => {
   const result = fs.readFileSync(resultPath, 'utf8');
-  expect(genDiff(firstJsonPath, secondJsonPath)).toBe(result);
-});
 
-test('Get diff two yaml files', () => {
-  const result = fs.readFileSync(resultPath, 'utf8');
-  expect(genDiff(firstYamlPath, secondYamlPath)).toBe(result);
-});
+  test('Get diff json files', () => {
+    expect(genDiff(firstJsonPath, secondJsonPath)).toBe(result);
+  });
 
-test('Get diff two ini files', () => {
-  const result = fs.readFileSync(resultPath, 'utf8');
-  expect(genDiff(firstIniPath, secondIniPath)).toBe(result);
+  test('Get diff yaml files', () => {
+    expect(genDiff(firstYamlPath, secondYamlPath)).toBe(result);
+  });
+
+  test('Get diff ini files', () => {
+    expect(genDiff(firstIniPath, secondIniPath)).toBe(result);
+  });
 });
