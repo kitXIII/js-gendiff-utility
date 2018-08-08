@@ -1,14 +1,9 @@
+import path from 'path';
+import fs from 'fs';
 import _ from 'lodash';
-import { safeLoad } from 'js-yaml';
-import { parse as iniParse } from 'ini';
+import parse from './parser';
 
-const parsers = {
-  json: JSON.parse,
-  yaml: safeLoad,
-  ini: iniParse,
-};
-
-const genDiffObjByKey = (key, obj1, obj2) => {
+const genDiffObjKey = (key, obj1, obj2) => {
   if (!_.has(obj1, key)) {
     return { [`+ ${key}`]: obj2[key] };
   }
@@ -21,18 +16,10 @@ const genDiffObjByKey = (key, obj1, obj2) => {
   return { [`+ ${key}`]: obj2[key], [`- ${key}`]: obj1[key] };
 };
 
-const genDiff = (firstData, secondData, type) => {
-  if (!(type in parsers)) {
-    const str = `Unsupported data type, use one of the following types: ${_.keys(parsers).join(' ')}`;
-    return str;
-  }
-
-  const obj1 = parsers[type](firstData);
-  const obj2 = parsers[type](secondData);
-
+const genDiffObj = (obj1, obj2) => {
   const keys = _.union(_.keys(obj1), _.keys(obj2));
   const result = keys.reduce((acc, key) => {
-    const diffObj = genDiffObjByKey(key, obj1, obj2);
+    const diffObj = genDiffObjKey(key, obj1, obj2);
     return { ...acc, ...diffObj };
   }, {});
 
@@ -40,4 +27,23 @@ const genDiff = (firstData, secondData, type) => {
   return resultStr;
 };
 
-export default genDiff;
+export default (firstConfig, secondConfig) => {
+  try {
+    const ext1 = path.extname(firstConfig).toLowerCase();
+    const ext2 = path.extname(secondConfig).toLowerCase();
+
+    if (ext1 !== ext2) {
+      throw new Error('Different types of congig files, use files of the same type');
+    }
+
+    const obj1 = parse(fs.readFileSync(firstConfig, 'utf8'), ext1);
+    const obj2 = parse(fs.readFileSync(secondConfig, 'utf8'), ext2);
+
+    const result = genDiffObj(obj1, obj2);
+
+    return result;
+  } catch (err) {
+    const str = err.message;
+    return str;
+  }
+};
