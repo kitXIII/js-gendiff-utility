@@ -23,7 +23,7 @@ test('Get diff two yaml files', () => {
   const firstRawData = fs.readFileSync(firstYamlPath, 'utf8');
   const secondRawData = fs.readFileSync(secondYamlPath, 'utf8');
   const result = fs.readFileSync(resultPath, 'utf8');
-  expect(genDiff(firstRawData, secondRawData, 'yml')).toBe(result);
+  expect(genDiff(firstRawData, secondRawData, 'yaml')).toBe(result);
 });
 
 test('Get diff two ini files', () => {
@@ -31,4 +31,8 @@ test('Get diff two ini files', () => {
   const secondRawData = fs.readFileSync(secondIniPath, 'utf8');
   const result = fs.readFileSync(resultPath, 'utf8');
   expect(genDiff(firstRawData, secondRawData, 'ini')).toBe(result);
+});
+
+test('Check wrong data type', () => {
+  expect(genDiff(null, null, '')).toMatch(/^Unsupported data type, use one of the following types/);
 });

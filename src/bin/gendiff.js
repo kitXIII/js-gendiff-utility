@@ -2,10 +2,11 @@
 import path from 'path';
 import fs from 'fs';
 import program from 'commander';
+import _ from 'lodash';
 
 import utility from '..';
 
-const types = new Set(['json', 'yml', 'ini']);
+const types = { '.json': 'json', '.yml': 'yaml', '.ini': 'ini' };
 
 const handler = (firstConfig, secondConfig, options) => {
   try {
@@ -18,9 +19,9 @@ const handler = (firstConfig, secondConfig, options) => {
       throw new Error('Different types of congig files, use files of the same type');
     }
 
-    const type = ext1.replace(/^\./, '');
-    if (!types.has(type)) {
-      const str = `Unsupported file type, use one of the following types: ${[...types].join(' ')}`;
+    const type = types[ext1];
+    if (!type) {
+      const str = `Unsupported file type, use one of the following types: ${_.keys(types).join(' ')}`;
       throw new Error(str);
     }
 
@@ -38,7 +39,7 @@ const handler = (firstConfig, secondConfig, options) => {
 };
 
 program
-  .version('0.0.9')
+  .version('0.0.10')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'Output format', 'txt')
   .arguments('<firstConfig> <secondConfig>')

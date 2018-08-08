@@ -4,7 +4,7 @@ import { parse as iniParse } from 'ini';
 
 const parsers = {
   json: JSON.parse,
-  yml: safeLoad,
+  yaml: safeLoad,
   ini: iniParse,
 };
 
@@ -22,6 +22,11 @@ const genDiffObjByKey = (key, obj1, obj2) => {
 };
 
 const genDiff = (firstData, secondData, type) => {
+  if (!(type in parsers)) {
+    const str = `Unsupported data type, use one of the following types: ${_.keys(parsers).join(' ')}`;
+    return str;
+  }
+
   const obj1 = parsers[type](firstData);
   const obj2 = parsers[type](secondData);
 
