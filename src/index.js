@@ -3,6 +3,8 @@ import fs from 'fs';
 import _ from 'lodash';
 import parse from './parser';
 
+const dataTypes = { '.json': 'json', '.yml': 'yaml', '.ini': 'ini' };
+
 const genDiffObjKey = (key, obj1, obj2) => {
   if (!_.has(obj1, key)) {
     return { [`+ ${key}`]: obj2[key] };
@@ -28,22 +30,22 @@ const genDiffObj = (obj1, obj2) => {
 };
 
 export default (firstConfig, secondConfig) => {
-  try {
-    const ext1 = path.extname(firstConfig).toLowerCase();
-    const ext2 = path.extname(secondConfig).toLowerCase();
+  const ext1 = path.extname(firstConfig).toLowerCase();
+  const ext2 = path.extname(secondConfig).toLowerCase();
 
-    if (ext1 !== ext2) {
-      throw new Error('Different types of congig files, use files of the same type');
-    }
-
-    const obj1 = parse(fs.readFileSync(firstConfig, 'utf8'), ext1);
-    const obj2 = parse(fs.readFileSync(secondConfig, 'utf8'), ext2);
-
-    const result = genDiffObj(obj1, obj2);
-
-    return result;
-  } catch (err) {
-    const str = err.message;
-    return str;
+  if (ext1 !== ext2) {
+    return null;
   }
+
+  const type = dataTypes[ext1];
+  if (!type) {
+    return null;
+  }
+
+  const obj1 = parse(fs.readFileSync(firstConfig, 'utf8'), type);
+  const obj2 = parse(fs.readFileSync(secondConfig, 'utf8'), type);
+
+  const result = genDiffObj(obj1, obj2);
+
+  return result;
 };
