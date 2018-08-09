@@ -19,22 +19,29 @@ const getItemStr = (prefix, key, value, depth) => {
   return `${indentStr(depth)}${prefix}${key}: ${val}`;
 };
 
-const statusHandlers = {
-  unchanged: (item, depth) => getItemStr('  ', item.key, item.value, depth),
-  changed: (item, depth) => `${getItemStr('- ', item.key, item.oldValue, depth)}\n${getItemStr('+ ', item.key, item.value, depth)}`,
-  added: (item, depth) => getItemStr('+ ', item.key, item.value, depth),
-  removed: (item, depth) => getItemStr('- ', item.key, item.value, depth),
-};
+const prefixes = { added: '+ ', removed: '- ', unchanged: '  ' };
 
-const render = (array, depth = 0) => {
+const renders = [
+  {
+    check: node => _.has(node, 'children'),
+    render: (node, depth, fn) => `${indentStr(depth)}${prefixes.unchanged}${node.key}: ${fn(node.children, depth + 1)}`,
+  },
+  {
+    check: node => node.status in prefixes,
+    render: (node, depth) => getItemStr(prefixes[node.status], node.key, node.value, depth),
+  },
+  {
+    check: node => node.status === 'changed',
+    render: (node, depth) => `${getItemStr(prefixes.removed, node.key, node.oldValue, depth)}\n${getItemStr(prefixes.added, node.key, node.value, depth)}`,
+  },
+];
+
+const renderDiff = (array, depth = 0) => {
   const result = array.reduce((acc, node) => {
-    if (_.has(node, 'children')) {
-      const value = render(node.children, depth + 1);
-      return `${acc}${indentStr(depth)}  ${node.key}: ${value}\n`;
-    }
-    return `${acc}${statusHandlers[node.status](node, depth)}\n`;
+    const { render } = _.find(renders, ({ check }) => check(node));
+    return `${acc}${render(node, depth, renderDiff)}\n`;
   }, '');
   return `{\n${result}${closingBraceIndentStr(depth)}}`;
 };
 
-export default render;
+export default renderDiff;
