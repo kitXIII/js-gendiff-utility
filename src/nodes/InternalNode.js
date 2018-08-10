@@ -5,7 +5,7 @@ export default class InternalNode {
   }
 
   toString(depth = 0, space = '  ') {
-    const indentStr = depth === 1 ? space : space.repeat(depth + 2);
+    const indentStr = space.repeat(depth * 2);
     const str = this.children.map(child => child.toString(depth + 1)).join('\n');
     const keyStr = this.key ? `${indentStr}${this.key}: ` : '';
     return `${keyStr}{\n${str}\n${indentStr}}`;
