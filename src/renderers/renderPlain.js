@@ -1,5 +1,5 @@
-const valueStr = value => (value instanceof Object ? '[complex value]' : `'${value}'`);
-const keyStr = (nodeParentStr, key) => `Property '${nodeParentStr}.${key}'`;
+const valueStr = val => (val instanceof Object ? '[complex value]' : `${typeof val === 'string' ? `'${val}'` : `${val}`}`);
+const keyStr = (nodeParentStr, key) => `Property '${nodeParentStr === '' ? `${key}` : `${nodeParentStr}.${key}`}'`;
 
 const render = (nodes, parentStr = '') => {
   const renderers = {

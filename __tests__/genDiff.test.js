@@ -14,19 +14,19 @@ const secondYamlPath = path.resolve(__dirname, '__fixtures__/after.yml');
 const firstIniPath = path.resolve(__dirname, '__fixtures__/before.ini');
 const secondIniPath = path.resolve(__dirname, '__fixtures__/after.ini');
 
-describe('Get diff between two files,and output to simple format', () => {
+describe('Get diff between two files,and output to pretty format', () => {
   const result = fs.readFileSync(resultPath, 'utf8');
 
   test('Get diff json files', () => {
-    expect(genDiff(firstJsonPath, secondJsonPath, 'simple')).toBe(result);
+    expect(genDiff(firstJsonPath, secondJsonPath, 'pretty')).toBe(result);
   });
 
   test('Get diff yaml files', () => {
-    expect(genDiff(firstYamlPath, secondYamlPath, 'simple')).toBe(result);
+    expect(genDiff(firstYamlPath, secondYamlPath, 'pretty')).toBe(result);
   });
 
   test('Get diff ini files', () => {
-    expect(genDiff(firstIniPath, secondIniPath, 'simple')).toBe(result);
+    expect(genDiff(firstIniPath, secondIniPath, 'pretty')).toBe(result);
   });
 });
 
@@ -34,6 +34,6 @@ describe('Get diff between two files,and output to plain text format', () => {
   const result = fs.readFileSync(resultPlainPath, 'utf8');
 
   test('Get diff json files', () => {
-    expect(genDiff(firstJsonPath, secondJsonPath, 'simple')).toBe(result);
+    expect(genDiff(firstJsonPath, secondJsonPath, 'plain')).toBe(result);
   });
 });

@@ -1,8 +1,8 @@
-import renderSimple from './renderSimple';
+import renderSimple from './renderPretty';
 import renderPlain from './renderPlain';
 
 const renderers = {
-  simple: renderSimple,
+  pretty: renderSimple,
   plain: renderPlain,
 };
 
