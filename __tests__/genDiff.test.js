@@ -3,8 +3,8 @@ import path from 'path';
 import genDiff from '../src';
 
 const resultPath = path.resolve(__dirname, '__fixtures__/result.txt');
-
 const resultPlainPath = path.resolve(__dirname, '__fixtures__/result_plain.txt');
+const resultJsonPath = path.resolve(__dirname, '__fixtures__/result_json.json');
 
 const firstJsonPath = path.resolve(__dirname, '__fixtures__/before.json');
 const secondJsonPath = path.resolve(__dirname, '__fixtures__/after.json');
@@ -36,5 +36,13 @@ describe('Get diff between two files,and output to plain text format', () => {
 
   test('Get diff json files', () => {
     expect(genDiff(firstJsonPath, secondJsonPath, 'plain')).toBe(result);
+  });
+});
+
+describe('Get diff between two files,and output to json format', () => {
+  const result = fs.readFileSync(resultJsonPath, 'utf8');
+
+  test('Get diff yaml files', () => {
+    expect(genDiff(firstYamlPath, secondYamlPath, 'json')).toBe(result);
   });
 });
