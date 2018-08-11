@@ -6,19 +6,19 @@ import render from './renderers';
 
 const dataTypes = { '.json': 'json', '.yml': 'yaml', '.ini': 'ini' };
 
-export default (firstConfig, secondConfig, format) => {
-  const ext1 = path.extname(firstConfig).toLowerCase();
-  const ext2 = path.extname(secondConfig).toLowerCase();
-
-  const type1 = dataTypes[ext1];
-  const type2 = dataTypes[ext2];
-
-  if (!type1 || !type2) {
-    return null;
+const readFileToObj = (fileName) => {
+  const ext = path.extname(fileName).toLowerCase();
+  const type = dataTypes[ext];
+  if (!type) {
+    throw new Error(`File type ${ext} is not supported`);
   }
 
-  const obj1 = parse(fs.readFileSync(firstConfig, 'utf8'), type1);
-  const obj2 = parse(fs.readFileSync(secondConfig, 'utf8'), type2);
+  return parse(fs.readFileSync(fileName, 'utf8'), type);
+};
+
+export default (firstConfig, secondConfig, format) => {
+  const obj1 = readFileToObj(firstConfig);
+  const obj2 = readFileToObj(secondConfig);
 
   const result = buildDiff(obj1, obj2);
   return render(result, format);

@@ -7,4 +7,12 @@ const parsers = {
   ini: iniParse,
 };
 
-export default (data, ext) => parsers[ext](data);
+export default (data, type) => {
+  const parser = parsers[type](data);
+
+  if (!parser) {
+    throw new Error(`Data type ${type} is not supported`);
+  }
+
+  return parser;
+};
