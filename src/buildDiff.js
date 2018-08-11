@@ -31,4 +31,4 @@ const buildDiff = (object1, object2) => {
   return keys.reduce((acc, key) => [...acc, genDiffByKey(key, object1, object2)], []);
 };
 
-export default buildDiff;
+export default (obj1, obj2) => ({ type: 'root', children: buildDiff(obj1, obj2) });

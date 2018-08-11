@@ -19,8 +19,12 @@ const renders = {
     const keyStr = node.key ? `${indentStr}${node.key}: ` : '';
     return `${keyStr}{\n${str}\n${indentStr}}`;
   },
+  root: (node, depth) => {
+    const str = node.children.map(child => render(child, depth + 1)).join('\n'); // eslint-disable-line
+    return `{\n${str}\n}`;
+  },
 };
 
 const render = (node, depth = 0) => renders[node.type](node, depth);
 
-export default ast => render({ key: null, type: 'internal', children: ast }, 0);
+export default render;
