@@ -1,30 +1,29 @@
-// import _ from 'lodash';
+import _ from 'lodash';
 import stringify from './utilities/stringify';
 
 const space = '  ';
 
-const getItemStr = (prefix, key, value, depth) => {
+const geNodeStr = (prefix, key, value, depth) => {
   const indentStr = depth === 0 ? '' : space.repeat(depth * 2 - 1);
   return `${indentStr}${prefix} ${key}: ${stringify(value, depth, space)}`;
 };
 
-const renders = {
-  added: (node, depth) => getItemStr('+', node.key, node.value, depth),
-  removed: (node, depth) => getItemStr('-', node.key, node.value, depth),
-  unchanged: (node, depth) => getItemStr(' ', node.key, node.value, depth),
-  changed: (node, depth) => `${getItemStr('-', node.key, node.oldValue, depth)}\n${getItemStr('+', node.key, node.newValue, depth)}`,
-  internal: (node, depth) => {
-    const indentStr = space.repeat(depth * 2);
-    const str = node.children.map(child => renders[child.type](child, depth + 1)).join('\n');
-    const keyStr = node.key ? `${indentStr}${node.key}: ` : '';
-    return `${keyStr}{\n${str}\n${indentStr}}`;
-  },
-  root: (node) => {
-    const str = node.children.map(child => renders[child.type](child, 1)).join('\n');
-    return `{\n${str}\n}`;
-  },
-};
+const render = (nodes, depth = 0) => {
+  const renderers = {
+    added: (node, nodeDepth) => geNodeStr('+', node.key, node.value, nodeDepth),
+    removed: (node, nodeDepth) => geNodeStr('-', node.key, node.value, nodeDepth),
+    unchanged: (node, nodeDepth) => geNodeStr(' ', node.key, node.value, nodeDepth),
+    changed: (node, nodeDepth) => [
+      geNodeStr('-', node.key, node.oldValue, nodeDepth),
+      geNodeStr('+', node.key, node.newValue, nodeDepth),
+    ],
+    internal: (node, nodeDepth) => geNodeStr(' ', node.key, render(node.children, nodeDepth), nodeDepth),
+  };
 
-const render = renders.root;
+  const indentStr = space.repeat(depth * 2);
+  const nodesStrings = nodes.map(child => renderers[child.type](child, depth + 1));
+  const flattenNodesStings = _.flatten(nodesStrings);
+  return ['{', ...flattenNodesStings, `${indentStr}}`].join('\n');
+};
 
 export default render;
