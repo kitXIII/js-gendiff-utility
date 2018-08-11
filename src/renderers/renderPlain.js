@@ -1,4 +1,5 @@
-const valueStr = val => (val instanceof Object ? '[complex value]' : `${typeof val === 'string' ? `'${val}'` : `${val}`}`);
+const wrapQotes = value => (typeof value === 'string' ? `'${value}'` : value);
+const valueStr = value => (value instanceof Object ? '[complex value]' : `${wrapQotes(value)}`);
 const keyStr = (parents, key) => `Property '${[...parents, key].join('.')}'`;
 
 const render = (nodes, parents = []) => {
