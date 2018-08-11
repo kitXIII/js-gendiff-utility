@@ -15,16 +15,16 @@ const renders = {
   changed: (node, depth) => `${getItemStr('-', node.key, node.oldValue, depth)}\n${getItemStr('+', node.key, node.newValue, depth)}`,
   internal: (node, depth) => {
     const indentStr = space.repeat(depth * 2);
-    const str = node.children.map(child => render(child, depth + 1)).join('\n'); // eslint-disable-line
+    const str = node.children.map(child => renders[child.type](child, depth + 1)).join('\n');
     const keyStr = node.key ? `${indentStr}${node.key}: ` : '';
     return `${keyStr}{\n${str}\n${indentStr}}`;
   },
-  root: (node, depth) => {
-    const str = node.children.map(child => render(child, depth + 1)).join('\n'); // eslint-disable-line
+  root: (node) => {
+    const str = node.children.map(child => renders[child.type](child, 1)).join('\n');
     return `{\n${str}\n}`;
   },
 };
 
-const render = (node, depth = 0) => renders[node.type](node, depth);
+const render = renders.root;
 
 export default render;
