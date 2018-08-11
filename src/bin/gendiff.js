@@ -4,7 +4,7 @@ import program from 'commander';
 import genDiff from '..';
 
 program
-  .version('0.0.17')
+  .version('0.0.18')
   .description('Compares two configuration files and shows a difference.')
   .option('-f, --format [type]', 'Output format', 'pretty')
   .arguments('<firstConfig> <secondConfig>')
