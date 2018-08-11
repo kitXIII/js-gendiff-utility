@@ -7,11 +7,11 @@ const stringify = (obj, depth = 0) => {
     return `${obj}`;
   }
 
-  const result = _.keys(obj).reduce((acc, key) => {
+  const result = _.keys(obj).map((key) => {
     const val = stringify(obj[key], depth + 1);
-    return `${acc}${indentStr(depth)}    ${key}: ${val}\n`;
-  }, '');
-  return `{\n${result}${indentStr(depth)}}`;
+    return `${indentStr(depth)}    ${key}: ${val}`;
+  });
+  return ['{', ...result, `${indentStr(depth)}}`].join('\n');
 };
 
 const getNodeStr = (prefix, key, value, depth) => `${indentStr(depth)}  ${prefix} ${key}: ${stringify(value, depth + 1)}`;
