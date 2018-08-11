@@ -11,7 +11,8 @@ export default (data, type) => {
   const parser = parsers[type](data);
 
   if (!parser) {
-    throw new Error(`Data type ${type} is not supported`);
+    const errorStr = `Data type ${type} is not supported`;
+    throw new Error(errorStr);
   }
 
   return parser;

@@ -10,7 +10,8 @@ const readFileToObj = (fileName) => {
   const ext = path.extname(fileName).toLowerCase();
   const type = dataTypes[ext];
   if (!type) {
-    throw new Error(`File type ${ext} is not supported`);
+    const errorStr = `File type ${ext} is not supported`;
+    throw new Error(errorStr);
   }
 
   return parse(fs.readFileSync(fileName, 'utf8'), type);
