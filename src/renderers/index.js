@@ -1,8 +1,8 @@
-import renderSimple from './renderPretty';
+import renderPretty from './renderPretty';
 import renderPlain from './renderPlain';
 
 const renderers = {
-  pretty: renderSimple,
+  pretty: renderPretty,
   plain: renderPlain,
   json: JSON.stringify,
 };
