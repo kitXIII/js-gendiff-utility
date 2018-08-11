@@ -2,6 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import parse from './parser';
 import buildDiff from './buildDiff';
+import renderDiff from './renderDiff';
 
 const dataTypes = { '.json': 'json', '.yml': 'yaml', '.ini': 'ini' };
 
@@ -20,5 +21,5 @@ export default (firstConfig, secondConfig) => {
   const obj2 = parse(fs.readFileSync(secondConfig, 'utf8'), type2);
 
   const result = buildDiff(obj1, obj2);
-  return result.toString();
+  return renderDiff(result);
 };
