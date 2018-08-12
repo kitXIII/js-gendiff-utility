@@ -11,7 +11,8 @@ Utility that compares two configuration files and shows a difference.
 
 `$ npm install -g kit-diff-util`
 
-[Installation asciinema](https://asciinema.org/a/195997)
+
+![](https://kitxiii.github.io/media/gif/gendiff_inst.gif)
 
 
 ## Get help
@@ -48,7 +49,4 @@ To specify format of output file, use --format option:
 ## Demo
 
 
-#### Actual asciinema
-
-
-[asciinema](https://asciinema.org/a/195998)
+![](https://kitxiii.github.io/media/gif/gendiff_usage.gif)
