@@ -11,6 +11,8 @@ Utility that compares two configuration files and shows a difference.
 
 `$ npm install -g kit-diff-util`
 
+[Installation asciinema](https://asciinema.org/a/195997)
+
 
 ## Get help
 
@@ -18,18 +20,35 @@ Utility that compares two configuration files and shows a difference.
 `$ gendiff -h`
 
 
-## Demo JSON file
+## Usage
 
-![](https://kitxiii.github.io/media/gif/gendiff006.gif)
 
-## Demo YAML file
+`$ gendiff <firstConfig> <secondConfig>`
 
-![](https://kitxiii.github.io/media/gif/gendiff007.gif)
 
-## Demo ini file
+To specify format of output file, use --format option:
 
-![](https://kitxiii.github.io/media/gif/gendiff008.gif)
 
-## Actual asciinema
+`$ gendiff --format [type] <firstConfig> <secondConfig>`
 
-[asciinema](https://asciinema.org/a/195962)
+
+#### Supported input file formats
+
+- json
+- yml
+- ini
+
+#### Supported out data formats
+
+- pretty (json-like view)
+- plain text
+- json (without indentation)
+
+
+## Demo
+
+
+#### Actual asciinema
+
+
+[asciinema](https://asciinema.org/a/195998)
