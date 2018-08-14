@@ -12,7 +12,7 @@ const buildDiff = (object1, object2) => {
 
     if (obj1[key] instanceof Object && obj2[key] instanceof Object) {
       const diff = buildDiff(obj1[key], obj2[key]);
-      return { type: 'internal', key, children: diff };
+      return { type: 'nested', key, children: diff };
     }
 
     if (obj1[key] === obj2[key]) {
@@ -28,7 +28,7 @@ const buildDiff = (object1, object2) => {
   };
 
   const keys = _.union(_.keys(object1), _.keys(object2));
-  return keys.reduce((acc, key) => [...acc, genDiffByKey(key, object1, object2)], []);
+  return keys.map(key => genDiffByKey(key, object1, object2));
 };
 
 export default buildDiff;
