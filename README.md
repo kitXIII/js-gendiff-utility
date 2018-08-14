@@ -1,6 +1,6 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/33137a6a1e48050f5c90/maintainability)](https://codeclimate.com/github/kitXIII/project-lvl2-s309/maintainability) [![Build Status](https://travis-ci.org/kitXIII/project-lvl2-s309.svg?branch=master)](https://travis-ci.org/kitXIII/project-lvl2-s309)
+[![Maintainability](https://api.codeclimate.com/v1/badges/33137a6a1e48050f5c90/maintainability)](https://codeclimate.com/github/kitXIII/project-lvl2-s309/maintainability) [![Build Status](https://travis-ci.org/kitXIII/project-lvl2-s309.svg?branch=master)](https://travis-ci.org/kitXIII/project-lvl2-s309) [![NPM Version](http://img.shields.io/npm/v/commander.svg?style=flat)](https://www.npmjs.org/package/kit-diff-util)
 
-# Console getdiff utility
+# Console gendiff utility
 
 
 Utility that compares two configuration files and shows a difference.
