@@ -31,18 +31,14 @@ describe('Get diff between two files,and output to pretty format', () => {
   });
 });
 
-describe('Get diff between two files,and output to plain text format', () => {
-  const result = fs.readFileSync(resultPlainPath, 'utf8');
-
-  test('Get diff json files', () => {
+describe('Get diff between two files,and output to alternative format', () => {
+  test('Output diff to plain text format', () => {
+    const result = fs.readFileSync(resultPlainPath, 'utf8');
     expect(genDiff(firstJsonPath, secondJsonPath, 'plain')).toBe(result);
   });
-});
 
-describe('Get diff between two files,and output to json format', () => {
-  const result = fs.readFileSync(resultJsonPath, 'utf8');
-
-  test('Get diff yaml files', () => {
+  test('Output diff to json format', () => {
+    const result = fs.readFileSync(resultJsonPath, 'utf8');
     expect(genDiff(firstYamlPath, secondYamlPath, 'json')).toBe(result);
   });
 });
