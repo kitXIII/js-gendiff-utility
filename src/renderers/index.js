@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import renderPretty from './renderPretty';
 import renderPlain from './renderPlain';
 
@@ -8,12 +9,9 @@ const renderers = {
 };
 
 export default (ast, format) => {
-  const render = renderers[format](ast);
-
-  if (!render) {
+  if (!_.has(renderers, format)) {
     const errorStr = `Output format ${format} is not supported`;
     throw new Error(errorStr);
   }
-
-  return render;
+  return renderers[format](ast);
 };
