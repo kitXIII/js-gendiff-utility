@@ -3,6 +3,7 @@ import path from 'path';
 import genDiff from '../src';
 
 const resultPath = path.resolve(__dirname, '__fixtures__/result.txt');
+
 const resultPlainPath = path.resolve(__dirname, '__fixtures__/result_plain.txt');
 const resultJsonPath = path.resolve(__dirname, '__fixtures__/result_json.json');
 
