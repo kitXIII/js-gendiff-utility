@@ -13,7 +13,6 @@ const readFileToObj = (fileName) => {
     const errorStr = `File type ${ext} is not supported`;
     throw new Error(errorStr);
   }
-
   return parse(fs.readFileSync(fileName, 'utf8'), type);
 };
 
