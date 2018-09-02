@@ -8,12 +8,12 @@ const parsers = {
 };
 
 export default (data, type) => {
-  const parser = parsers[type](data);
+  const parse = parsers[type];
 
-  if (!parser) {
+  if (!parse) {
     const errorStr = `Data type ${type} is not supported`;
     throw new Error(errorStr);
   }
 
-  return parser;
+  return parse(data);
 };
