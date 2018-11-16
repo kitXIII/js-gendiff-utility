@@ -6,7 +6,7 @@ const stringify = (obj, depth = 0) => {
   if (!_.isObject(obj)) {
     return `${obj}`;
   }
-  const result = _.keys(obj).map(key => `${indent(depth)}    ${key}: ${stringify(obj[key], depth + 1)}`);
+  const result = _.keys(obj).map(key => `${indent(depth + 1)}${key}: ${stringify(obj[key], depth + 1)}`);
   return ['{', ...result, `${indent(depth)}}`].join('\n');
 };
 
