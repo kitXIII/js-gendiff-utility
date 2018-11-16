@@ -1,6 +1,6 @@
 {
   "name": "kit-diff-util",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Diff util project",
   "bin": {
     "gendiff": "dist/bin/gendiff.js"
