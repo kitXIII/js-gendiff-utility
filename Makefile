@@ -11,8 +11,12 @@ build:
 publish:
 	npm publish
 
+publish-patch:
+	npm version patch
+	npm publish
+
 lint:
-	npm run eslint .
+	npx eslint .
 
 test:
 	npm test
