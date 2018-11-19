@@ -61,7 +61,6 @@
     "eslint-plugin-lodash-fp": "^2.2.0-a1",
     "flow-bin": "^0.84",
     "flow-typed": "^2.5.1",
-    "gulp-babel": "^8.0.0",
     "jest": "^23.6.0",
     "jest-cli": "^23.6.0"
   },
