@@ -51,18 +51,15 @@
     "@babel/preset-flow": "^7.0.0",
     "babel-core": "^7.0.0-0",
     "babel-eslint": "^10.0.1",
-    "babel-jest": "^24.9.0",
+    "babel-jest": "^25.5.1",
     "eslint": "^5.8.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-babel": "^5.2.1",
-    "eslint-plugin-flowtype": "^3.1.1",
     "eslint-plugin-import": "^2.14.0",
-    "eslint-plugin-jest": "^23.3.0",
+    "eslint-plugin-jest": "^23.8.2",
     "eslint-plugin-lodash-fp": "^2.2.0-a1",
-    "flow-bin": "^0.84",
-    "flow-typed": "^2.5.1",
-    "jest": "^24.9.0",
-    "jest-cli": "^24.9.0"
+    "jest": "^25.5.3",
+    "jest-cli": "^25.5.3"
   },
   "dependencies": {
     "commander": "^2.20.3",
